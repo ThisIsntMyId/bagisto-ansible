@@ -1,0 +1,27 @@
+---
+# tasks file for nginx
+- name: check if apache is installed
+  apt: 
+    name: apache2
+    state: present
+  register: apache2_is_present
+- name: Remove apache2
+  import_tasks: removeapache2.yml
+  when: apache2_is_present is defined
+- name: Make sure nginx is installed
+  apt: 
+    name: nginx
+- name: Ensure nginx is running
+  service:
+      name: nginx
+      state: started
+      enabled: yes
+- name: Check wether ufw is enabled or not
+  ufw:
+    state: enabled
+  register: ufw_enabled
+- name: Enable Nginx Full in ufw
+  ufw:
+    rule: allow
+    name: Nginx Full
+# - name: Remove default sites-available and enabled

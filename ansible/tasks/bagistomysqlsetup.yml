@@ -1,0 +1,17 @@
+---
+# This file deals with the database setup for bagisto
+- name: Create prject database
+  become: true
+  mysql_db:
+    name: "{{ dbname }}"
+    state: present
+- name: Create prject database user
+  become: true
+  mysql_user:
+    name: "{{ dbuser }}"
+    password: "{{ dbpwd }}"
+    state: present
+    priv: "{{ dbname }}.*:ALL"
+- name: Flush all privileges
+  become: true
+  shell: "mysql -NBe \"flush privileges;\""

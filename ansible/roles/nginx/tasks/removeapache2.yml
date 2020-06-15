@@ -1,0 +1,29 @@
+---
+- name: Ensure Apache service is stopped
+  become: true
+  service: 
+    name: apache2
+    state: stopped
+- name: Ensure no apache related package exists
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: absent
+    purge: yes
+  loop: 
+    - apache2
+    - apache2-utils
+    - apache2.2-bin
+    - apache2-common
+- name: Removing unwanted dependencies
+  become: true
+  apt: 
+    autoremove: yes
+    purge: yes
+- name: Find whereis apache2 installed
+  become: true
+  shell: whereis apache2
+  register: whereisoutput
+- name: Removing apache files
+  become: true
+  shell: "rm -Rf {{whereisoutput.stdout | replace('apache2: ', '')}}"

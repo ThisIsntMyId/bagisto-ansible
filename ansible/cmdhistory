@@ -1,0 +1,134 @@
+    1  clear
+    2  exit
+    3  sxit
+    4  clear
+    5  exit
+    6  cd ~ && clear
+    7  cd ~ && clear
+    8  vim
+    9  cd ~
+   10  mysql -u testbagisto -p
+   11  sudo mysql
+   12  mysql -u testadmin -p
+   13  cd ~
+   14  ls -
+   15  ls -a
+   16  echo $PATH
+   17  laravel
+   18  systemctl nginx status
+   19  systemctl status nginx
+   20  apache2 --version
+   21  whereis apache2
+   22  mysql
+   23  sudo su 
+   24  mysl
+   25  mysql
+   26  mysql -u root -p
+   27  laravel
+   28  sudo su -
+   29  clear
+   30  cd ~ && clear
+   31  ufw status
+   32  sudo ufw status
+   33  python --version
+   34  python3 --version
+   35  apt search python-mysql
+   36  apt list  python-mysql
+   37  apt list python3-mysql
+   38  apt list python3-mysqldb
+   39  apt list python-mysqldb
+   40  php -v
+   41  node -v
+   42  npm -v
+   43  composer
+   44  laravel
+   45  la -a
+   46  cd .config/
+   47  ls 
+   48  cd composer/
+   49  ls
+   50  ls vendor
+   51  ls bin
+   52  ls
+   53  cd vendor/bin/
+   54  ls
+   55  cd ~
+   56  laravel
+   57  cd .config/composer/vendor/bin/
+   58  laravel
+   59  ls
+   60  cd laravel
+   61  mysql
+   62  mysql -u root -p
+   63  clear
+   64  sudo mysql
+   65  sudo grep 'temporary password' /var/log/mysqld.log
+   66  cd /var/log/
+   67  ls
+   68  cd mysql/
+   69  sudo cd mysql/
+   70  php -v
+   71  clear
+   72  sudo su -
+   73  cd ~
+   74  mysql -u testadmin -p
+   75  cd /etc/nginx/
+   76  ls
+   77  cd sites-available/
+   78  ls
+   79  cat default
+   80  cd /var/www
+   81  ls
+   82  sudo rm -r bagisto
+   83  ls
+   84  cd ..
+   85  ls -ltr
+   86  sudo chown -R $USER:$USER www
+   87  ls -ltr
+   88  cd www
+   89  ls
+   90  composer create-project --prefer-dist bagisto/bagisto .
+   91  rm -r bagisto/
+   92  ls
+   93  mkdir bagisto
+   94  composer create-project --prefer-dist bagisto/bagisto bagisto
+   95  ls
+   96  cd bagisto
+   97  cat .env
+   98  sudo nano .env
+   99  sudo mysql -NBe "SET GLOBAL log_bin_trust_function_creators = 1;"
+  100  php artisan migrate
+  101  php artisan db:seed
+  102  php artisan vendor:publish
+  103  php artisan storage:link
+  104  composer dump-autoload
+  105  cd /etc/nginx
+  106  ls
+  107  cd sites-enables
+  108  cd sites-enabled
+  109  ls
+  110  rm default
+  111  sudo rm default
+  112  ls
+  113  systemctl nginx reload
+  114  systemctl reloasd nginx
+  115  systemctl reload nginx
+  116  sudo systemctl reload nginx
+  117  /var/www
+  118  cd /var/www
+  119  ls 
+  120  cd bagisto
+  121  ls -ltr
+  122  cd ..
+  123  chown -R www-data:www-data bagisto
+  124  ls -ltr
+  125  cd ..
+  126  chown -R www-data:www-data www
+  127  sudo chown -R www-data:www-data bagisto
+  128  cd www/bagisto/
+  129  ls -lt
+  130  cd ..
+  131  sudo chown -R www-data:www-data bagisto
+  132  ls -ltr
+  133  history 
+  134  history > cmdhistory

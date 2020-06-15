@@ -1,0 +1,21 @@
+---
+# tasks file for laravel
+- name: check if laravel exists
+  stat: 
+    path: "{{ remote_home }}/.config/.composer/vendor/bin/laravel"
+  register: laravel_path
+- name: require laravel package
+  composer:
+    command: require
+    global_command: yes
+    arguments: laravel/installer
+  when: not laravel_path.stat.exists
+- name: update path variable
+  lineinfile: 
+    path: "{{ remote_home }}/.bashrc"
+    line: export PATH="$HOME/.config/.composer/vendor/bin:$PATH"
+  become: true
+  when: not laravel_path.stat.exists
+- name: source bashrc file
+  shell: . ~/.bashrc
+  when: not laravel_path.stat.exists

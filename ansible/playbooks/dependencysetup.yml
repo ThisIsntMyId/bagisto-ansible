@@ -1,0 +1,61 @@
+---
+# This playbook will install all the necessary packages and configures them to their base state
+
+# Setting Up Dependencies
+  # ✅ Utilities: curl, git, tmux, rsync, zip, unzip
+  # ✅ Initiate swap space
+  # ✅ Install Nginx (w-w/o ssl)
+    # enable http/https in firewall
+    # disable and remove default site
+  # ✅ Install and configure php and php-extensions
+  # Install and configure mysql (with mysql_secure_installation)(create root user)
+  # (refer:
+    #   https://github.com/lasselehtinen/barn/blob/master/roles/mysqltier/tasks/mysql.yml
+    #   https://stackoverflow.com/questions/25136498/ansible-answers-to-mysql-secure-installation
+    # )
+    # Install mysql-python for ansible purpose
+    # make sure mysql is running ansiblemodule=> service: name=mysql state=started enabled=yes
+    # update .my.cnf to setup root
+    # del annonymous users and test database
+  # Install Composer
+  # Install Laravel
+  # Install Node (user gerlingguy.node)
+
+- hosts: all
+  vars_files: 
+    - "../host_vars/{{ inventory_hostname }}.yml"
+  tasks: 
+    - import_role: 
+        name: ../roles/essentials
+      tags: essentials
+      become: true
+    - import_role: 
+        name: ../roles/swap
+      tags: swap
+      become: true
+    - import_role: 
+        name: ../roles/nginx
+      tags: nginx
+      become: true
+    - import_role: 
+        name: ../roles/php
+      tags: php
+      become: true
+    - import_role:
+        name: ../roles/geerlingguy.mysql
+      vars:
+        mysql_root_password: "{{ mysqlrootpwd }}"
+      tags: mysql
+      become: true
+    - import_role:
+        name: ../roles/geerlingguy.composer
+      tags: composer
+      become: true
+    - import_role:
+        name: ../roles/laravel
+      tags: laravel
+    - import_role:
+        name: ../roles/geerlingguy.nodejs
+      tags: nodejs
+      become: true
+  

@@ -1,0 +1,15 @@
+---
+# tasks file for essentials
+- name: Installing essential packages
+  apt: 
+    name: "{{ item }}"
+    state: present
+  become: true
+  loop:
+    - curl
+    - git
+    - tmux
+    - rsync
+    - zip
+    - unzip
+    - htop

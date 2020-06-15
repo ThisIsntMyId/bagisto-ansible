@@ -1,0 +1,10 @@
+---
+# This file set up firewall and allow OpenSSH
+- name: Enable the firewall
+  ufw:
+    state: enabled
+
+- name: Allow OpenSSH
+  ufw:
+    rule: allow
+    name: OpenSSH

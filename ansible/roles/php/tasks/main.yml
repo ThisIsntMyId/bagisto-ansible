@@ -1,0 +1,37 @@
+---
+# tasks file for php
+- name: install php and php-extensions
+  apt: 
+    name: "{{ item }}"
+    state: present
+  loop:
+    - php
+    - php-fpm
+    - php-common
+    - php-mysql
+    - php-xml
+    - php-xmlrpc
+    - php-curl
+    - php-gd
+    - php-imagick
+    - php-cli
+    - php-dev
+    - php-imap
+    - php-mbstring
+    - php-opcache
+    - php-soap
+    - php-zip
+    - php-intl
+    - php-json
+    - php-readline
+    # - php-mcrypt
+    - php-bcmath
+    # - php-pdo
+  become: yes
+# - name: configure php with php.ini, restart php-fpm after cnofiguring
+# - name: Ensure nginx is running
+#   service:
+#       name: 
+#       state: started
+#       enabled: yes
+# - name: configure php-fpm with php.ini, restart php-fpm after cnofiguring

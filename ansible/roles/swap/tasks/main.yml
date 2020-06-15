@@ -1,0 +1,16 @@
+---
+# tasks file for swap
+# refer: https://github.com/lasselehtinen/barn/blob/master/roles/common/tasks/swap
+
+- name: checking if swap space is needed
+  when: ansible_memory_mb.swap.total < 4000
+  set_fact:
+    needs_extra_swap: true
+- name: free some memory in laravel
+  shell: sudo fallocate -l 4G ~/swapfile
+  become: true
+  when: needs_extra_swap is defined and needs_extra_swap == true
+- name: perform swap
+  shell: sudo mkswap ~/swapfile -f && sudo swapon -p 1000 ~/swapfile
+  become: true
+  when: needs_extra_swap is defined and needs_extra_swap == true

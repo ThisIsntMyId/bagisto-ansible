@@ -1,0 +1,19 @@
+---
+# This file deals with the server setup for bagisto
+- name: Configure Nginx Server for Bagisto
+  template:
+    src: ../templates/bagisto.conf.j2
+    dest: /etc/nginx/sites-available/bagisto.conf
+    owner: root
+    group: root
+  become: true
+  notify:
+    - Reload Nginx
+- name: Enabling Bagisto Config
+  file:
+    src: /etc/nginx/sites-available/bagisto.conf
+    dest: /etc/nginx/sites-enabled/bagisto.conf
+    state: link
+  become: true
+  notify:
+    - Reload Nginx

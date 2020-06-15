@@ -1,0 +1,30 @@
+---
+# This file deals with the server setup for bagisto
+- name: Create /var/www/bagisto and Set /var/www/bagisto and its content's group and user to www-data 
+  become: true
+  file:
+    path: /var/www/bagisto
+    state: directory
+- name: composer require project
+  composer:
+    command: create-project
+    arguments: bagisto/bagisto /var/www/bagisto
+    prefer_dist: yes
+    working_dir: /var/www/bagisto
+  become: true
+  become_user: ansibleadmin
+- name: Install composer dependencies
+  shell: 
+    cmd: composer install
+    chdir: /var/www/bagisto
+  become: true
+- name: Install node depedencies
+  shell: 
+    cmd: npm install
+    chdir: /var/www/bagisto
+- name: Set www-data user and group
+  file: 
+    path: /var/www/bagisto
+    group: www-data
+    owner: www-data
+    recurse: yes

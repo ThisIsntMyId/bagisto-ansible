@@ -1,0 +1,11 @@
+---
+# Project Configure
+  # update .env
+  # SET GLOBAL log_bin_trust_function_creators = 1; in mysql
+  # run the following commands: >
+    # 2. php artisan migrate
+    # 3. php artisan db:seed
+    # 4. php artisan vendor:publish
+        # -> Press 0 and then press enter to publish all assets and configurations.
+    # 5. php artisan storage:link
+    # 6. composer dump-autoload
