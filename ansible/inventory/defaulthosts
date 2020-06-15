@@ -45,5 +45,9 @@
 [testnodes]
 testnode1 ansible_host=139.59.7.176
 
+[prodnodes]
+prodnode1 ansible_host=206.189.137.184
+
 [all:children]
 testnodes
+prodnodes

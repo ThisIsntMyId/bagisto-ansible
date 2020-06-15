@@ -29,6 +29,6 @@
   import_playbook: playbooks/projectsetup.yml
   tags: setupproject
 
-# - name: Configure Project
-  # import_playbook: playbooks/projectconfigure.yml
-  # tags: configureproject
+- name: Configure Project
+  import_playbook: playbooks/projectconfigure.yml
+  tags: configureproject

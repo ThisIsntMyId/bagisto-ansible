@@ -9,3 +9,56 @@
         # -> Press 0 and then press enter to publish all assets and configurations.
     # 5. php artisan storage:link
     # 6. composer dump-autoload
+- hosts: all
+  become: true
+  vars_files: 
+      - "../host_vars/{{ inventory_hostname }}.yml"
+  tasks: 
+    - name: update .env
+      template: 
+        src: ../templates/.env.j2
+        dest: /var/www/bagisto/.env
+        owner: www-data
+        group: www-data
+        mode: '0644'
+    - name: Set mysql logging
+      shell: 
+        cmd: mysql -NBe "SET GLOBAL log_bin_trust_function_creators = 1";
+        chdir: /var/www/bagisto
+    - name: Migrate Database
+      shell: 
+        cmd: php artisan migrate
+        chdir: /var/www/bagisto
+    - name: Seed the database
+      shell: 
+        cmd: php artisan db:seed
+        chdir: /var/www/bagisto
+    - name: Setup storage link
+      shell: 
+        cmd: php artisan storage:link
+        chdir: /var/www/bagisto
+    - name: Finished
+      debug: 
+        msg: All done from our side. Now it please do php artisan:vendor publish and composer dump-autoload by yourself. Thanks 🙌🙌
+    - name: Install pip
+      tags: ohshit
+      apt:
+        update_cache: yes
+        name:
+          - python3-pip
+    - name: Install pexpect
+      tags: ohshit
+      pip:
+        name: pexpect
+    - name: Vendor publish
+      tags: ohshit
+      expect: 
+        command: php artisan vendor:publish
+        chdir: /var/www/bagisto
+        responses:
+          Which provider or tag's files would you like to publish?:(.*): '1'
+    - name: Composer dump-autoload
+      tags: ohshit
+      shell: 
+        cmd: composer dump-autoload
+        chdir: /var/www/bagisto

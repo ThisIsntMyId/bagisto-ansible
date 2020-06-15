@@ -17,3 +17,10 @@
   become: true
   notify:
     - Reload Nginx
+- name: Deleting default.conf
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  become: true
+  notify:
+    - Reload Nginx
