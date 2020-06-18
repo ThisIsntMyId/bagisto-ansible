@@ -43,11 +43,15 @@
 #db-[99:101]-node.example.com
 
 [testnodes]
-testnode1 ansible_host=139.59.7.176
+testchild1 ansible_host=157.245.108.7
+testchild2 ansible_host=157.245.108.143
+testchild3 ansible_host=68.183.90.183
+testchild4 ansible_host=157.245.100.189
 
-[prodnodes]
-prodnode1 ansible_host=206.189.137.184
+[sourcenodes]
+sourcenode1 ansible_host=157.245.100.152
+
 
 [all:children]
 testnodes
-prodnodes
+sourcenodes

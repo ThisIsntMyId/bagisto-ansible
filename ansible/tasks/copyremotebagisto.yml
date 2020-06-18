@@ -1,0 +1,48 @@
+---
+# This file deals with the server setup for bagisto
+- name: Set www's group and owner as ansibleadmin
+  file: 
+    path: /var/www
+    owner: ansibleadmin
+    group: ansibleadmin
+    state: directory
+  become: true
+- name: Create /var/www/bagisto
+  become: true
+  file:
+    path: /var/www/bagisto
+    state: directory
+- name: copy local project folder to target
+  tags: copyremote
+  become: true
+  become_user: ansibleadmin
+  delegate_to: 157.245.100.152
+  synchronize:
+    src: /var/www/bagisto/
+    dest: /var/www/bagisto/
+    recursive: yes
+    perms: yes
+    group: yes
+    owner: yes
+    rsync_opts:
+      - "--exclude=vendor"
+      - "--exclude=node_modules"
+      - "--exclude=public/storage"
+- name: Install composer dependencies
+  shell: 
+    cmd: composer install
+    chdir: /var/www/bagisto
+  become: true
+- name: Install node depedencies
+  become: true
+  shell: 
+    cmd: npm install
+    chdir: /var/www/bagisto
+- name: Set www-data user and group
+  become: true
+  file: 
+    path: /var/www/bagisto
+    group: www-data
+    owner: www-data
+    recurse: yes
+    state: directory

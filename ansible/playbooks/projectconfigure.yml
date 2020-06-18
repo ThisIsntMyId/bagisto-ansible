@@ -34,6 +34,8 @@
         cmd: php artisan db:seed
         chdir: /var/www/bagisto
     - name: Setup storage link
+      tags: ohshit
+      become: true
       shell: 
         cmd: php artisan storage:link
         chdir: /var/www/bagisto

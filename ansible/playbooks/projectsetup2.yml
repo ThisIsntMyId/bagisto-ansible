@@ -1,0 +1,33 @@
+---
+# This dependency will set up project, configure nginx, and create mysql db, user for porject
+
+# Setting up project
+  # Mysql: creating adminuser
+  # Nginx: setup nginx config
+    # point root to /var/www/{{ site_name }}
+  # Git: clone project or Composer requrie bagisto/bagisto
+  # Composer install
+  # Npm install
+
+- hosts: all
+  vars_files: 
+      - "../host_vars/{{ inventory_hostname }}.yml"
+  tasks: 
+    - name: Initiating project setup
+      debug: 
+        msg: "Starting to set up project: tasks involve set up db, configufe nginx, and bring project from composer "
+    - name: Bagisto Db Setup Mysql db, user
+      import_tasks: ../tasks/bagistomysqlsetup.yml
+      tags: bagistomysqlsetup
+    - name: Bagisto Nginx Server Setup
+      import_tasks: ../tasks/bagistonginxsetup.yml
+      tags: bagistonginxsetup
+    - name: Copy bagisto from local (../../bagisto)
+      import_tasks: ../tasks/copylocalbagisto.yml
+      tags: copylocalproject
+  handlers:
+    - name: Reload Nginx
+      become: true
+      service: 
+        name: nginx
+        state: reloaded

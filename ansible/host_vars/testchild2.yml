@@ -1,0 +1,21 @@
+---
+# Misc
+node_name: testchild2
+host_name: testchild2
+node_type: testchild
+
+# Project specific
+domain_name: bagisto
+
+# Php configs
+
+# Nginx Server Configs
+ssl: false
+
+# Mysql Configs
+mysqlrootpwd: rOot@1234
+
+# Application Configs
+dbname: testbagisto
+dbuser: testadmin
+dbpwd: tEst@123

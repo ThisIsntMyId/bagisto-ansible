@@ -1,0 +1,34 @@
+---
+# Main playbook to set up the instance
+# Must test ansible ping before running this playbook
+
+# Setup firewall 
+# Setting Up Dependencies
+# Setting up project
+# Project Configure
+
+
+- hosts: all
+  tasks:
+    - name: Starting
+      debug:
+        msg: "Starting to deploy on host {{ inventory_hostname }}"
+  tags: init
+
+- hosts: all
+  become: true
+  tasks:
+    - import_tasks: tasks/setupfirewall.yml
+  tags: firewall:init
+
+- name: Setup Dependencies
+  import_playbook: playbooks/dependencysetup.yml
+  tags: setupdependencies
+
+- name: Setup Project
+  import_playbook: playbooks/projectsetupremote.yml
+  tags: setupproject
+
+- name: Configure Project
+  import_playbook: playbooks/projectconfigure.yml
+  tags: configureproject

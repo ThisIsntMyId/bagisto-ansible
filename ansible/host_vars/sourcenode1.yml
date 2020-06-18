@@ -1,0 +1,21 @@
+---
+# Misc
+node_name: sourcenode1
+host_name: sourcenode1
+node_type: sourcenode
+
+# Project specific
+domain_name: bagisto
+
+# Php configs
+
+# Nginx Server Configs
+ssl: false
+
+# Mysql Configs
+mysqlrootpwd: rOot@1234
+
+# Application Configs
+dbname: testbagisto
+dbuser: testadmin
+dbpwd: tEst@123
